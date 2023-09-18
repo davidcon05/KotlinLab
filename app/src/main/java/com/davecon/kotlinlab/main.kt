@@ -89,7 +89,42 @@ fun main() {
     println(startsWithREndsWithL)
 
     //region OOP Concepts: Primary Constructors, Inits, Inheritance, Interface, Extensions, Data Class
+    /**
+     * Objects are the fundmental building blocks of OOP. They can live on their own but they can also
+     * be used to create classes. Classes are the blueprint for objects. They can be used to create
+     * instances of objects.
+     * Classes can inherit from other classes.
+     * Classes can implement interfaces.
+     * Classes can be extended.
+     * Classes can be data classes.
+     *
+     * If a car is a collection of systems then the car is the object and the systems are the classes.
+     */
+
+    val myCar = Car(color = "Blue", make = "Toyota")
+    println("Car color: ${myCar.color} make: ${myCar.make}")
 
 
     //region Advanced Concepts: Generics, Enums, State, Sealed Classes,
+}
+
+// Parameters for a class are called properties of the primary constructor
+class Car(var color: String = "Red", var make: String = "Ford") {
+    // By making the properties var or val, they become properties of the class
+    //var color = color
+    //var make = make
+    /**
+     * The init block is called when the class is instantiated, this means that the init block
+     * is called before the constructor. So passing in other properties to the constructor will
+     * not work because they have not been instantiated yet.
+     */
+    init {
+        // We can also use flow control here to set the properties conditionally
+
+        color = "Purple"
+        make = "Tesla"
+    }
+    fun drive() {
+        println("Driving... vroom vroom!")
+    }
 }
