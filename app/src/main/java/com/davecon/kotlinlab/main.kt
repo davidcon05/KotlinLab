@@ -103,6 +103,9 @@ fun main() {
 
     val myCar = Car(color = "Blue", make = "Toyota")
     println("Car color: ${myCar.color} make: ${myCar.make}")
+    myCar.drive()
+    myCar.speed(100, 50)
+
 
 
     //region Advanced Concepts: Generics, Enums, State, Sealed Classes,
@@ -123,6 +126,10 @@ class Car(var color: String = "Red", var make: String = "Ford") {
 
         color = "Purple"
         make = "Tesla"
+    }
+
+    fun speed(maxSpeed: Int, currentSpeed: Int) {
+        println("Max speed: $maxSpeed Current speed: $currentSpeed")
     }
     fun drive() {
         println("Driving... vroom vroom!")
