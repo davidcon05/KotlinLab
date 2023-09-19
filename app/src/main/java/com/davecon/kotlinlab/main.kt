@@ -139,11 +139,12 @@ fun main() {
         mario.onClick(message = "It's a me, Mario!")
 
     // Extension functions
-
+    println("Hello Player One ".append("and Ariana"))
+    println("!David!".removeFirstAndLast())
     //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
 
 }
-
+//region Classes and Inheritance
 class Truck(): Car() {
     override fun drive() {
         println("Driving a truck... vroom vroom!")
@@ -176,6 +177,7 @@ open class Car(var color: String = "Red", var make: String = "Ford") {
     }
 }
 
+// region Interfaces
 class Button(val label: String): ClickEvent {
     override fun onClick(message: String) {
         println("Clicked by $label with message: $message")
@@ -190,4 +192,13 @@ class Character(val name: String): ClickEvent {
 
 interface ClickEvent {
     fun onClick(message: String)
+}
+
+//region Extension Functions
+fun String.append(toAppend: String): String {
+    return this.plus(toAppend)
+}
+
+fun String.removeFirstAndLast(): String {
+    return this.substring(1, this.length - 1)
 }
