@@ -134,9 +134,9 @@ fun main() {
      */
 
     val button = Button(label = "myButton")
-        button.onClick(message = "Hello World!")
+    button.onClick(message = "Hello World!")
     val mario = Button(label = "Mario")
-        mario.onClick(message = "It's a me, Mario!")
+    mario.onClick(message = "It's a me, Mario!")
 
     // Extension functions
     println("Hello Player One ".append("and Ariana"))
@@ -148,14 +148,20 @@ fun main() {
 
     //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
     //  Generics
+    val listOfItems = listOf("Dave", "John", "Jane", "Rachel", "Rafael")
+    val finder = Finder(listOfItems)
+    finder.findItem(element = "John") { item ->
+        println("Found item: $item")
+    }
 
     // Enums and State
 
     // Sealed Classes
 
 }
+
 //region Classes and Inheritance
-class Truck(): Car() {
+class Truck() : Car() {
     override fun drive() {
         println("Driving a truck... vroom vroom!")
     }
@@ -188,13 +194,13 @@ open class Car(var color: String = "Red", var make: String = "Ford") {
 }
 
 // region Interfaces
-class Button(val label: String): ClickEvent {
+class Button(val label: String) : ClickEvent {
     override fun onClick(message: String) {
         println("Clicked by $label with message: $message")
     }
 }
 
-class Character(val name: String): ClickEvent {
+class Character(val name: String) : ClickEvent {
     override fun onClick(message: String) {
         println("Clicked by $name with message: $message")
     }
@@ -215,3 +221,17 @@ fun String.removeFirstAndLast(): String {
 
 //region Data Classes
 data class Person(val name: String, val age: Int)
+
+//region Generics
+class Finder(private val list: List<String>) {
+    fun findItem(
+        element: String,
+        foundItem: (element: String?) ->
+        Unit
+    ) {
+        val itemFound = list.filter {
+            it == element
+        }
+        if (itemFound.isNullOrEmpty()) foundItem(null) else foundItem(itemFound.first())
+    }
+}
