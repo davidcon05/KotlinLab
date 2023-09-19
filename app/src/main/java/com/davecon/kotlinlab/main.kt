@@ -106,13 +106,41 @@ fun main() {
     myCar.drive()
     myCar.speed(100, 50)
 
+    // Inheritance and Overides
+    /**
+     * Allows us to inherit or mirror other classes, similar to how we create a BaseScreen and BaseTest
+     * in ui tests for the other screens to inheric from.Every class in Kotlin has Any as its superclass.
+     * Because of this, there is no need to specify it.
+     *
+     * In order to override a function, we need to use the "open" keyword in the parent class and the
+     * "override" keyword in the child class. See how Truck inherits from Car and overrides the drive
+     * function. In the classes below. The super keyword is used to call the parent class.
+     */
 
+    // Interface
+    /**
+     * Inheritance architecture should be used when there is a "is a" relationship between classes.
+     * 1) Objects should have common behavior and attributes
+     * 2) Design a class that represents the common behavior and attributes as a base
+     * 3) Decide if a subclass needs behaviors that are specific to that particular subclass type
+     *
+     * This creates an inheritance tree or hierarchy.
+     */
 
-    //region Advanced Concepts: Generics, Enums, State, Sealed Classes,
+    // Extension functions
+
+    //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
+
+}
+
+class Truck(): Car() {
+    override fun drive() {
+        println("Driving a truck... vroom vroom!")
+    }
 }
 
 // Parameters for a class are called properties of the primary constructor
-class Car(var color: String = "Red", var make: String = "Ford") {
+open class Car(var color: String = "Red", var make: String = "Ford") {
     // By making the properties var or val, they become properties of the class
     //var color = color
     //var make = make
@@ -131,7 +159,8 @@ class Car(var color: String = "Red", var make: String = "Ford") {
     fun speed(maxSpeed: Int, currentSpeed: Int) {
         println("Max speed: $maxSpeed Current speed: $currentSpeed")
     }
-    fun drive() {
+
+    open fun drive() {
         println("Driving... vroom vroom!")
     }
 }
