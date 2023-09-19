@@ -141,7 +141,10 @@ fun main() {
     // Extension functions
     println("Hello Player One ".append("and Ariana"))
     println("!David!".removeFirstAndLast())
+
     //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
+    val David = Person(name = "David", age = 35)
+    println(David)
 
 }
 //region Classes and Inheritance
@@ -202,3 +205,6 @@ fun String.append(toAppend: String): String {
 fun String.removeFirstAndLast(): String {
     return this.substring(1, this.length - 1)
 }
+
+//region Data Classes
+data class Person(val name: String, val age: Int)
