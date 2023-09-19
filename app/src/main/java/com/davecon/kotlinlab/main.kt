@@ -142,9 +142,16 @@ fun main() {
     println("Hello Player One ".append("and Ariana"))
     println("!David!".removeFirstAndLast())
 
-    //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
+    // Data classes
     val David = Person(name = "David", age = 35)
     println(David)
+
+    //region Advanced Concepts: Generics, Higher Order Functions, Lambdas, Coroutines, Flow, DSLs
+    //  Generics
+
+    // Enums and State
+
+    // Sealed Classes
 
 }
 //region Classes and Inheritance
