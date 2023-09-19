@@ -117,7 +117,6 @@ fun main() {
      * function. In the classes below. The super keyword is used to call the parent class.
      */
 
-    // Interface
     /**
      * Inheritance architecture should be used when there is a "is a" relationship between classes.
      * 1) Objects should have common behavior and attributes
@@ -126,6 +125,18 @@ fun main() {
      *
      * This creates an inheritance tree or hierarchy.
      */
+
+    // Interface
+    /**
+     * An interface is a contract that a class can implement. It is a way to define a set of behaviors
+     * that a class must implement. Interfaces are similar to abstract classes in Java.
+     * This can be as simple as an implementation for a click event.
+     */
+
+    val button = Button(label = "myButton")
+        button.onClick(message = "Hello World!")
+    val mario = Button(label = "Mario")
+        mario.onClick(message = "It's a me, Mario!")
 
     // Extension functions
 
@@ -163,4 +174,20 @@ open class Car(var color: String = "Red", var make: String = "Ford") {
     open fun drive() {
         println("Driving... vroom vroom!")
     }
+}
+
+class Button(val label: String): ClickEvent {
+    override fun onClick(message: String) {
+        println("Clicked by $label with message: $message")
+    }
+}
+
+class Character(val name: String): ClickEvent {
+    override fun onClick(message: String) {
+        println("Clicked by $name with message: $message")
+    }
+}
+
+interface ClickEvent {
+    fun onClick(message: String)
 }
