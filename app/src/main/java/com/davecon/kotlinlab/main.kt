@@ -154,6 +154,21 @@ fun main() {
         println("Found item: $item")
     }
 
+    /**
+     * Generic type is a flexible class or interface that is paramterized over types.
+     */
+
+    val listOfNumbers = listOf(18, 21, 32, 40)
+    val genericFinderInt = GenericFinder(listOfNumbers)
+    genericFinderInt.findItem(40) {
+        println("Generic Found item: $it")
+    }
+    // findItem() must match the argument passed in to the GenericFinder class
+    val genericFinderString = GenericFinder(listOfItems)
+    genericFinderString.findItem("Rachel") {
+        println("Generic Found item: $it")
+    }
+
     // Enums and State
 
     // Sealed Classes
@@ -235,3 +250,18 @@ class Finder(private val list: List<String>) {
         if (itemFound.isNullOrEmpty()) foundItem(null) else foundItem(itemFound.first())
     }
 }
+
+class GenericFinder<T>(private val list: List<T>) {
+    fun findItem(
+        element: T,
+        foundItem: (element: T?) ->
+        Unit
+    ) {
+        val itemFound = list.filter {
+            it == element
+        }
+        if (itemFound.isNullOrEmpty()) foundItem(null) else foundItem(itemFound.first())
+    }
+}
+
+enum class Result
