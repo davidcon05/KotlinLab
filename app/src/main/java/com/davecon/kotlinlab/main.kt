@@ -1,5 +1,7 @@
 package com.davecon.kotlinlab
 
+import java.lang.Exception
+
 fun main() {
     //region Lambdas
     /**
@@ -177,7 +179,11 @@ fun main() {
     Repository.error()
     getResult(Repository.getCurrentState())
 
+    Repository.GradeRepository.graded()
+    println(Repository.GradeRepository.getGrade())
+
     // Sealed Classes
+
 
 }
 
@@ -271,16 +277,17 @@ class GenericFinder<T>(private val list: List<T>) {
 }
 
 // Custom is to write all enums in ALL CAPS
-enum class Result {
-    SUCCESS,
-    ERROR,
-    IDLE,
-    LOADING
+enum class Result(s: String) {
+    SUCCESS("Success"),
+    ERROR("Success"),
+    IDLE("Success"),
+    LOADING("Success")
 }
 
 fun getResult(result: Result) {
     return when(result) {
         Result.SUCCESS -> println("Success")
+        Result.LOADING -> println("Loading...")
         Result.ERROR -> println("Error")
         Result.IDLE -> println("Idle")
         else -> println("WTF did you do?")
@@ -309,5 +316,36 @@ object Repository {
     fun getCurrentState(): Result {
         return loadState
     }
+
+    /**
+     * Think of this as an abstract class
+     *
+     * Sealed classes are used to represent restricted class hierarchies, when a value can have one
+     * of the types from a limited set, but cannot have any other type. They are, in a sense, an
+     * extension of enum classes: the set of values for an enum type is also restricted, but each
+     * can only be a single value, whereas a sealed class can contain multiple values.
+     */
+    abstract class Grade
+    data class Pass(val dataFetch: String?): Grade()
+    data class Fail(val exception: Exception): Grade()
+    object NotGraded: Grade()
+
+    object GradeRepository {
+        private var gradeState: Grade = NotGraded
+        private var Pass: String? = null
+        fun graded() {
+            gradeState = Pass(Pass)
+        }
+
+        fun getGrade(): Any {
+            return when(gradeState) {
+                is Pass -> gradeState
+                is Fail -> gradeState
+                is NotGraded -> gradeState
+                else -> { println("WTF did you do?") }
+            }
+        }
+    }
+
 
 }
