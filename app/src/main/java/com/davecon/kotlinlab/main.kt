@@ -170,6 +170,12 @@ fun main() {
     }
 
     // Enums and State
+    Repository.startFetch()
+    getResult(Repository.getCurrentState())
+    Repository.fetchComplete()
+    getResult(Repository.getCurrentState())
+    Repository.error()
+    getResult(Repository.getCurrentState())
 
     // Sealed Classes
 
@@ -264,4 +270,44 @@ class GenericFinder<T>(private val list: List<T>) {
     }
 }
 
-enum class Result
+// Custom is to write all enums in ALL CAPS
+enum class Result {
+    SUCCESS,
+    ERROR,
+    IDLE,
+    LOADING
+}
+
+fun getResult(result: Result) {
+    return when(result) {
+        Result.SUCCESS -> println("Success")
+        Result.ERROR -> println("Error")
+        Result.IDLE -> println("Idle")
+        else -> println("WTF did you do?")
+    }
+}
+
+// Applies the singleton pattern
+object Repository {
+    private var loadState: Result = Result.IDLE
+    private var dataFetched: String? = null
+    fun startFetch() {
+        loadState = Result.LOADING
+        dataFetched = "data"
+    }
+
+    fun fetchComplete() {
+        loadState = Result.SUCCESS
+        dataFetched = null
+    }
+
+    fun error() {
+        loadState = Result.ERROR
+        dataFetched = "data not fetched"
+    }
+
+    fun getCurrentState(): Result {
+        return loadState
+    }
+
+}
